@@ -6,6 +6,5 @@
 # TODO
 - В проект можно добавить новые сайты без изменения кода.
 - В проекте можно сделать параллельный парсинг сайтов.
-
 [![Actions Status](https://github.com/alxkzncoff/job4j_grabber/workflows/java-ci/badge.svg)](https://github.com/alxkzncoff/job4j_grabber/actions)
 [![codecov](https://codecov.io/gh/alxkzncoff/job4j_grabber/branch/master/graph/badge.svg?token=7OSS8KWKA8)](https://codecov.io/gh/alxkzncoff/job4j_grabber)
