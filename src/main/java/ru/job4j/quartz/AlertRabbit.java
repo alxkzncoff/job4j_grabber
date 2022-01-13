@@ -24,6 +24,10 @@ public class AlertRabbit {
         AlertRabbit.connection = connection;
     }
 
+    /**
+     * Метод выгружает данные из файла конфигурации и создает
+     * соединение с БД.
+     */
     private static void init() {
         Properties config = new Properties();
         try (InputStream in = AlertRabbit.class.getResourceAsStream("/rabbit.properties")) {
