@@ -21,30 +21,30 @@ public class SqlRuDateTimeParser implements DateTimeParser {
             Map.entry("ноя", "11"),
             Map.entry("дек", "12"));
 
-    private static final  DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-MM-yy HH:mm");
-    private static final  DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d-MM-yy");
+    private static final String TODAY = "сегодня";
+    private static final String YESTERDAY = "вчера";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-MM-yy HH:mm");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d-MM-yy");
 
 
     /**
      * Метод преобразует строку в дату.
+     *
      * @param parse строка, которую необходимо преобразовать.
      * @return Дата.
      */
     @Override
     public LocalDateTime parser(String parse) {
-        String dateTime = null;
+        String dateTime;
         String date = parse.split(",")[0];
         String time = parse.split(",")[1];
-        if ("сегодня".equals(date)) {
-
+        if (TODAY.equals(date)) {
             dateTime = LocalDate.now().format(DATE_FORMATTER)
                     + time;
-        }
-        if ("вчера".equals(date)) {
+        } else if (YESTERDAY.equals(date)) {
             dateTime = LocalDate.now().minusDays(1).format(DATE_FORMATTER)
                     + time;
-        }
-        if (!"сегодня".equals(date) && !"вчера".equals(date)) {
+        } else {
             dateTime = date.split(" ")[0]
                     + "-" + MONTHS.get(date.split(" ")[1])
                     + "-" + date.split(" ")[2]
