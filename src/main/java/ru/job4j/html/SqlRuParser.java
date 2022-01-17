@@ -7,9 +7,8 @@ import org.jsoup.select.Elements;
 
 public class SqlRuParser {
     public static void main(String[] args) throws Exception {
-        int pages = 5;
-        for (int i = 0; i <= pages; i++) {
-            Document doc = Jsoup.connect("https://www.sql.ru/forum/job-offers/" + pages).get();
+        for (int i = 0; i <= 5; i++) {
+            Document doc = Jsoup.connect("https://www.sql.ru/forum/job-offers/" + i).get();
             Elements row = doc.select(".postslisttopic");
             for (Element td: row) {
                 Element parent = td.parent();
