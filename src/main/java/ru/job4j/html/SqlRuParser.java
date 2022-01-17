@@ -7,14 +7,18 @@ import org.jsoup.select.Elements;
 
 public class SqlRuParser {
     public static void main(String[] args) throws Exception {
-        Document doc = Jsoup.connect("https://www.sql.ru/forum/job-offers").get();
-        Elements row = doc.select(".postslisttopic");
-        for (Element td: row) {
-            Element parent = td.parent();
-            Element href = td.child(0);
-            System.out.println(href.attr("href"));
-            System.out.println(href.text());
-            System.out.println(parent.children().get(5).text());
+        int pages = 5;
+        for (int i = 0; i <= pages; i++) {
+            Document doc = Jsoup.connect("https://www.sql.ru/forum/job-offers/" + pages).get();
+            Elements row = doc.select(".postslisttopic");
+            for (Element td: row) {
+                Element parent = td.parent();
+                Element href = td.child(0);
+                System.out.println(href.attr("href"));
+                System.out.println(href.text());
+                System.out.println(parent.children().get(5).text());
+            }
         }
+
     }
 }
