@@ -52,4 +52,9 @@ public class SqlRuDateTimeParser implements DateTimeParser {
         }
         return LocalDateTime.parse(dateTime, FORMATTER);
     }
+
+    public static void main(String[] args) {
+        SqlRuDateTimeParser parser = new SqlRuDateTimeParser();
+        System.out.println(parser.parser("24 дек 21, 11:37"));
+    }
 }
