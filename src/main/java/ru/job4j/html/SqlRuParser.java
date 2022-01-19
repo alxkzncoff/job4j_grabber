@@ -12,6 +12,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс собирает Java вакансии с сайта sql.ru.
+ * @author Aleksandr Kuznetsov.
+ * @version 1.0
+ */
 public class SqlRuParser implements Parse {
 
     private final DateTimeParser dateTimeParser;
@@ -33,13 +38,16 @@ public class SqlRuParser implements Parse {
             Elements tdTitle = doc.select(".messageHeader");
             Elements tdComments = doc.select(".msgBody");
             Elements tdDates = doc.select(".msgFooter");
+            String date = tdDates.text()
+                    .substring(0, tdDates.text().indexOf("["))
+                    .trim();
             result.setDescription(tdComments.get(1).text());
-            result.setCreated(dateTimeParser.parser(
-                    tdDates.get(0).text().split(", ")[0]
-                            + ", "
-                            + tdDates.get(0).text().split(", ")[1].split(" ")[0]));
+            result.setCreated(dateTimeParser.parser(date));
             result.setLink(link);
-            result.setTitle(tdTitle.get(0).text());
+            String title = tdTitle.get(0).text()
+                    .substring(0, tdTitle.text().indexOf("["))
+                    .trim();
+            result.setTitle(title);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,11 +63,14 @@ public class SqlRuParser implements Parse {
     public List<Post> list(String link) {
         List<Post> result = new ArrayList<>();
         try {
-            Document doc = Jsoup.connect(link).get();
-            Elements tdLinks = doc.select(".postslisttopic");
-            for (int i = 3; i < tdLinks.size(); i++) {
-                Post post = detail(tdLinks.get(i).child(0).attr("href"));
-                result.add(post);
+            for (int i = 1; i <= 5; i++) {
+                Document doc = Jsoup.connect(link + "/" + i).get();
+                Elements tdLinks = doc.select(".postslisttopic");
+                tdLinks.stream()
+                        .filter(l -> l.text().toLowerCase().contains("java")
+                                && !l.text().toLowerCase().contains("javascript"))
+                        .map(tdLink -> detail(tdLink.child(0).attr("href")))
+                        .forEach(result::add);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,6 +80,6 @@ public class SqlRuParser implements Parse {
 
     public static void main(String[] args) {
         SqlRuParser parser = new SqlRuParser(new SqlRuDateTimeParser());
-        System.out.println(parser.list("https://www.sql.ru/forum/job-offers"));
+        parser.list("https://www.sql.ru/forum/job-offers").forEach(System.out::println);
     }
 }
