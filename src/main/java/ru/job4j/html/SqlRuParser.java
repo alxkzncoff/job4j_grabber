@@ -35,19 +35,14 @@ public class SqlRuParser implements Parse {
         Post result = new Post();
         try {
             Document doc = Jsoup.connect(link).get();
-            Elements tdTitle = doc.select(".messageHeader");
-            Elements tdComments = doc.select(".msgBody");
             Elements tdDates = doc.select(".msgFooter");
             String date = tdDates.text()
                     .substring(0, tdDates.text().indexOf("["))
                     .trim();
-            result.setDescription(tdComments.get(1).text());
+            result.setDescription(doc.select(".msgBody").get(1).text());
             result.setCreated(dateTimeParser.parser(date));
             result.setLink(link);
-            String title = tdTitle.get(0).text()
-                    .substring(0, tdTitle.text().indexOf("["))
-                    .trim();
-            result.setTitle(title);
+            result.setTitle(doc.select(".messageHeader").get(0).ownText());
         } catch (IOException e) {
             e.printStackTrace();
         }
