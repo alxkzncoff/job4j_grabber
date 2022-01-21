@@ -101,7 +101,7 @@ public class PsqlStore implements Store, AutoCloseable {
      */
     @Override
     public Post findById(int id) {
-        Post result = new Post();
+        Post result = null;
         try (PreparedStatement ps = cn.prepareStatement(
                 "select * from post where id = ?"
         )) {
