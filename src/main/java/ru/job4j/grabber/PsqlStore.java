@@ -107,7 +107,7 @@ public class PsqlStore implements Store, AutoCloseable {
         )) {
             ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
-                while (resultSet.next()) {
+                if (resultSet.next()) {
                     result = resultSetHandle(resultSet);
                 }
             }
