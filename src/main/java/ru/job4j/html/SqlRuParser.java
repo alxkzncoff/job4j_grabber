@@ -63,7 +63,8 @@ public class SqlRuParser implements Parse {
                 Elements tdLinks = doc.select(".postslisttopic");
                 tdLinks.stream()
                         .filter(l -> l.text().toLowerCase().contains("java")
-                                && !l.text().toLowerCase().contains("javascript"))
+                                && !l.text().toLowerCase().contains("javascript")
+                                && !l.text().toLowerCase().contains("java script"))
                         .map(tdLink -> detail(tdLink.child(0).attr("href")))
                         .forEach(result::add);
             }
@@ -73,8 +74,8 @@ public class SqlRuParser implements Parse {
         return result;
     }
 
-    public static void main(String[] args) {
-        SqlRuParser parser = new SqlRuParser(new SqlRuDateTimeParser());
-        parser.list("https://www.sql.ru/forum/job-offers").forEach(System.out::println);
-    }
+//    public static void main(String[] args) {
+//        SqlRuParser parser = new SqlRuParser(new SqlRuDateTimeParser());
+//        parser.list("https://www.sql.ru/forum/job-offers").forEach(System.out::println);
+//    }
 }
