@@ -123,26 +123,4 @@ public class PsqlStore implements Store, AutoCloseable {
             cn.close();
         }
     }
-
-//    public static void main(String[] args) {
-//        Properties config = new Properties();
-//        try (InputStream in = PsqlStore.class.getResourceAsStream("/grabber.properties")) {
-//            config.load(in);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        PsqlStore store = new PsqlStore(config);
-//        Post post1 = new Post("test",
-//                "test link",
-//                "test description",
-//                LocalDateTime.now());
-//        Post post2 = new Post("test 1",
-//                "test link 1",
-//                "test description 1",
-//                LocalDateTime.now());
-//        store.save(post1);
-//        store.save(post2);
-//        store.getAll().forEach(System.out::println);
-//        System.out.println(store.findById(post1.getId()));
-//    }
 }

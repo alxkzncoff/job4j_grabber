@@ -73,9 +73,4 @@ public class SqlRuParser implements Parse {
         }
         return result;
     }
-
-//    public static void main(String[] args) {
-//        SqlRuParser parser = new SqlRuParser(new SqlRuDateTimeParser());
-//        parser.list("https://www.sql.ru/forum/job-offers").forEach(System.out::println);
-//    }
 }
