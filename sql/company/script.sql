@@ -15,7 +15,7 @@ from person p inner
 join company c 
 on p.company_id = c.id
 group by c.name
-having count(p.name) = (select count(p.name) as Количество_сотрудников
-						from person p
-						group by p.company_id
+having count(p.name) = (select count(name) as Количество_сотрудников
+						from person
+						group by company_id
 						order by Количество_сотрудников desc limit 1);
