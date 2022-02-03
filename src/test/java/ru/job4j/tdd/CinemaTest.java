@@ -38,4 +38,23 @@ public class CinemaTest {
         date.set(2020, 10, 10, 23, 00);
         Ticket ticket = cinema.buy(account, 1, 100, date);
     }
+
+    @Ignore @Test(expected = IllegalArgumentException.class)
+    public void whenBuySameTicket() {
+        Account account = new AccountCinema();
+        Cinema cinema = new Cinema3D();
+        Calendar date = Calendar.getInstance();
+        date.set(2020, 10, 10, 23, 00);
+        Ticket ticket1 = cinema.buy(account, 1, 100, date);
+        Ticket ticket2 = cinema.buy(account, 1, 100, date);
+    }
+
+    @Ignore @Test(expected = IllegalArgumentException.class)
+    public void whenWrongDate() {
+        Account account = new AccountCinema();
+        Cinema cinema = new Cinema3D();
+        Calendar date = Calendar.getInstance();
+        date.set(1990, 12, 31, 23, 59);
+        Ticket ticket = cinema.buy(account, 1, 100, date);
+    }
 }
