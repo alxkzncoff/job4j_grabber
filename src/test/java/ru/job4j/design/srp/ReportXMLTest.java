@@ -23,11 +23,12 @@ public class ReportXMLTest {
         String actual = engine.generate(em -> true);
         StringBuilder expected = new StringBuilder()
                 .append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n")
-                .append("<employee name=\"").append(worker.getName()).append("\"")
+                .append("<employees>\n")
+                .append("    <employees name=\"").append(worker.getName()).append("\"")
                 .append(" hired=\"2022-01-01T00:00:00+03:00\"")
                 .append(" fired=\"2022-01-01T00:00:00+03:00\"")
-                .append(" salary=\"").append(worker.getSalary()).append("\"")
-                .append("/>\n");
+                .append(" salary=\"").append(worker.getSalary()).append("\"/>\n")
+                .append("</employees>\n");
         assertEquals(expected.toString(), actual);
     }
 }
