@@ -22,12 +22,10 @@ public class ReportXML implements Report {
         List<Employee> employees = store.findBy(filter);
 
         try (StringWriter writer = new StringWriter()) {
-            JAXBContext context = JAXBContext.newInstance(Employee.class);
+            JAXBContext context = JAXBContext.newInstance(Employees.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            for (Employee employee: employees) {
-                marshaller.marshal(employee, writer);
-            }
+            marshaller.marshal(new Employees(employees), writer);
             result = writer.getBuffer().toString();
         } catch (IOException | JAXBException e) {
             e.printStackTrace();
