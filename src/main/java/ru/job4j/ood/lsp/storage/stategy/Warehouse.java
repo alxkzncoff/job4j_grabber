@@ -18,6 +18,6 @@ public class Warehouse implements Storage {
 
     @Override
     public List<Food> getStorage() {
-        return storage;
+        return List.copyOf(storage);
     }
 }

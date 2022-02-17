@@ -11,17 +11,16 @@ public class Shop implements Storage {
 
     @Override
     public void add(Food food) {
-        if (checkQuality(food) >= 25 && checkQuality(food) <= 75) {
-            storage.add(food);
-        }
-        if (checkQuality(food) > 75 && checkQuality(food) <= 100) {
-            food.setPrice(food.getPrice() - (food.getPrice() * food.getDiscount()));
+        if (checkQuality(food) >= 25 && checkQuality(food) <= 100) {
+            if (checkQuality(food) > 75) {
+                food.setPrice(food.getPrice() - (food.getPrice() * food.getDiscount()));
+            }
             storage.add(food);
         }
     }
 
     @Override
     public List<Food> getStorage() {
-        return storage;
+        return List.copyOf(storage);
     }
 }

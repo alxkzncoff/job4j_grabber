@@ -20,7 +20,6 @@ public class ControlQualityTest {
 
     @Test
     public void whenMeatWarehouse() {
-        ControlQuality controlQuality = new ControlQuality();
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();
         Storage trash = new Trash();
@@ -28,18 +27,18 @@ public class ControlQualityTest {
         storages.add(warehouse);
         storages.add(shop);
         storages.add(trash);
+        ControlQuality controlQuality = new ControlQuality(storages);
         Food meat = new Meat("pork",
-                LocalDate.of(2022, 3, 15),
-                LocalDate.of(2022, 2, 15),
+                LocalDate.now().plusDays(28),
+                LocalDate.now().minusDays(2),
                 150.0,
                 0.25);
-        controlQuality.put(storages, meat);
+        controlQuality.put(meat);
         assertEquals(meat, warehouse.getStorage().get(0));
     }
 
     @Test
     public void whenMilkShop() {
-        ControlQuality controlQuality = new ControlQuality();
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();
         Storage trash = new Trash();
@@ -47,18 +46,18 @@ public class ControlQualityTest {
         storages.add(warehouse);
         storages.add(shop);
         storages.add(trash);
+        ControlQuality controlQuality = new ControlQuality(storages);
         Food milk = new Milk("milk",
-                LocalDate.of(2022, 2, 24),
-                LocalDate.of(2022, 2, 10),
+                LocalDate.now().plusDays(7),
+                LocalDate.now().minusDays(7),
                 80.0,
                 0.4);
-        controlQuality.put(storages, milk);
+        controlQuality.put(milk);
         assertEquals(milk, shop.getStorage().get(0));
     }
 
     @Test
     public void whenBreadShopDiscount() {
-        ControlQuality controlQuality = new ControlQuality();
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();
         Storage trash = new Trash();
@@ -66,23 +65,23 @@ public class ControlQualityTest {
         storages.add(warehouse);
         storages.add(shop);
         storages.add(trash);
+        ControlQuality controlQuality = new ControlQuality(storages);
         Food bread = new Bread("bread",
-                LocalDate.of(2022, 2, 18),
-                LocalDate.of(2022, 2, 10),
+                LocalDate.now().plusDays(1),
+                LocalDate.now().minusDays(7),
                 40.0,
                 0.5);
         Food expected = new Bread("bread",
-                LocalDate.of(2022, 2, 18),
-                LocalDate.of(2022, 2, 10),
+                LocalDate.now().plusDays(1),
+                LocalDate.now().minusDays(7),
                 20.0,
                 0.5);
-        controlQuality.put(storages, bread);
+        controlQuality.put(bread);
         assertEquals(expected, shop.getStorage().get(0));
     }
 
     @Test
     public void whenBeefTrash() {
-        ControlQuality controlQuality = new ControlQuality();
         Storage warehouse = new Warehouse();
         Storage shop = new Shop();
         Storage trash = new Trash();
@@ -90,12 +89,13 @@ public class ControlQualityTest {
         storages.add(warehouse);
         storages.add(shop);
         storages.add(trash);
+        ControlQuality controlQuality = new ControlQuality(storages);
         Food beef = new Meat("beef",
-                LocalDate.of(2022, 2, 16),
-                LocalDate.of(2022, 2, 1),
+                LocalDate.now().minusDays(1),
+                LocalDate.now().minusDays(16),
                 200.0,
                 0.4);
-        controlQuality.put(storages, beef);
+        controlQuality.put(beef);
         assertEquals(beef, trash.getStorage().get(0));
     }
 

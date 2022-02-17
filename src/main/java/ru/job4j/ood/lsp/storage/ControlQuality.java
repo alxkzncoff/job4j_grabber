@@ -15,7 +15,13 @@ import java.util.List;
 
 public class ControlQuality {
 
-    public void put(List<Storage> storages, Food food) {
+    private final List<Storage> storages;
+
+    public ControlQuality(List<Storage> storages) {
+        this.storages = storages;
+    }
+
+    public void put(Food food) {
         Context context = new Context();
         for (Storage storage: storages) {
             context.setStorage(storage);
