@@ -10,13 +10,16 @@ public class Shop implements Storage {
     private final List<Food> storage = new ArrayList<>();
 
     @Override
-    public void add(Food food) {
+    public boolean add(Food food) {
+        boolean result = false;
         if (checkQuality(food) >= 25 && checkQuality(food) <= 100) {
             if (checkQuality(food) > 75) {
                 food.setPrice(food.getPrice() - (food.getPrice() * food.getDiscount()));
             }
             storage.add(food);
+            result = true;
         }
+        return result;
     }
 
     @Override

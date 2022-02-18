@@ -12,7 +12,7 @@ public interface Storage {
                 / (food.getExpiryDate().getDayOfYear() - food.getCreateDate().getDayOfYear());
     }
 
-    void add(Food food);
+    boolean add(Food food);
 
     List<Food> getStorage();
 }

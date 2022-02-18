@@ -10,10 +10,13 @@ public class Warehouse implements Storage {
     private final List<Food> storage = new ArrayList<>();
 
     @Override
-    public void add(Food food) {
+    public boolean add(Food food) {
+        boolean result = false;
         if (checkQuality(food) < 25) {
             storage.add(food);
+            result = true;
         }
+        return result;
     }
 
     @Override

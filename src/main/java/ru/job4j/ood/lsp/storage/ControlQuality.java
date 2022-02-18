@@ -22,7 +22,9 @@ public class ControlQuality {
 
     public void put(Food food) {
         for (Storage storage: storages) {
-            storage.add(food);
+            if (storage.add(food)) {
+                break;
+            }
         }
     }
 }
