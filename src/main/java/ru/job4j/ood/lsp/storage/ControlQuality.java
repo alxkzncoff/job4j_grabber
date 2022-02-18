@@ -1,7 +1,6 @@
 package ru.job4j.ood.lsp.storage;
 
 import ru.job4j.ood.lsp.storage.food.Food;
-import ru.job4j.ood.lsp.storage.stategy.Context;
 import ru.job4j.ood.lsp.storage.stategy.Storage;
 
 import java.util.List;
@@ -22,10 +21,8 @@ public class ControlQuality {
     }
 
     public void put(Food food) {
-        Context context = new Context();
         for (Storage storage: storages) {
-            context.setStorage(storage);
-            context.execute(food);
+            storage.add(food);
         }
     }
 }
