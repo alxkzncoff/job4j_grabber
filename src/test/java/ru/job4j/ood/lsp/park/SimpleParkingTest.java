@@ -1,6 +1,5 @@
 package ru.job4j.ood.lsp.park;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,14 +9,14 @@ import static org.junit.Assert.*;
 
 public class SimpleParkingTest {
 
-    @Test @Ignore
+    @Test
     public void whenParkTrue() {
         Parking simpleParking = new SimpleParking(1, 2);
         Vehicle passengerCar = new PassengerCar();
         assertTrue(simpleParking.park(passengerCar));
     }
 
-    @Test @Ignore
+    @Test
     public void whenPass() {
         Parking simpleParking = new SimpleParking(1, 2);
         Vehicle passengerCar1 = new PassengerCar();
@@ -30,7 +29,7 @@ public class SimpleParkingTest {
         assertEquals(expected, simpleParking.getVehicles());
     }
 
-    @Test @Ignore
+    @Test
     public void whenPassTwoTrucks() {
         Parking simpleParking = new SimpleParking(1, 2);
         Vehicle truck1 = new Truck(4);
@@ -41,7 +40,7 @@ public class SimpleParkingTest {
         assertEquals(expected, simpleParking.getVehicles());
     }
 
-    @Test @Ignore
+    @Test
     public void whenFailSecondTruck() {
         Parking simpleParking = new SimpleParking(1, 2);
         Vehicle passengerCar1 = new PassengerCar();
@@ -54,7 +53,7 @@ public class SimpleParkingTest {
         assertFalse(simpleParking.park(truck2));
     }
 
-    @Test @Ignore
+    @Test
     public void whenFailTwoPassengerCars() {
         Parking simpleParking = new SimpleParking(1, 1);
         Vehicle passengerCar1 = new PassengerCar();

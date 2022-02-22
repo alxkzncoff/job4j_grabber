@@ -5,8 +5,8 @@ import java.util.List;
 
 public class SimpleParking implements Parking {
 
-    private final int truckSlots;
-    private final int passengerCarSlots;
+    private int truckSlots;
+    private int passengerCarSlots;
     private final List<Vehicle> vehicles = new ArrayList<>();
 
     public SimpleParking(int truckSlots, int passengerCarSlots) {
@@ -15,22 +15,41 @@ public class SimpleParking implements Parking {
     }
 
     @Override
-    public boolean park(Vehicle car) {
-        return false;
+    public boolean park(Vehicle vehicle) {
+        boolean result = false;
+        if (vehicle.getSize() == PassengerCar.SIZE && passengerCarSlots > 0) {
+            vehicles.add(vehicle);
+            passengerCarSlots--;
+            result = true;
+        }
+        if (vehicle.getSize() > PassengerCar.SIZE) {
+            if (truckSlots > 0) {
+                vehicles.add(vehicle);
+                truckSlots--;
+                result = true;
+            } else {
+                if (vehicle.getSize() <= passengerCarSlots) {
+                    vehicles.add(vehicle);
+                    passengerCarSlots -= vehicle.getSize();
+                    result = true;
+                }
+            }
+        }
+        return result;
     }
 
     @Override
     public int getTruckSlots() {
-        return 0;
+        return truckSlots;
     }
 
     @Override
     public int getPassengerCarSlots() {
-        return 0;
+        return passengerCarSlots;
     }
 
     @Override
     public List<Vehicle> getVehicles() {
-        return null;
+        return vehicles;
     }
 }
