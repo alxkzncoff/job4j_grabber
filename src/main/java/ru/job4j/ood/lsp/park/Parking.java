@@ -6,7 +6,9 @@ public interface Parking {
 
     boolean park(Vehicle car);
 
-    int getSlots();
+    int getTruckSlots();
+
+    int getPassengerCarSlots();
 
     List<Vehicle> getVehicles();
 }
