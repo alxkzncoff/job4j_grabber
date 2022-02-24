@@ -21,19 +21,15 @@ public class SimpleParking implements Parking {
             vehicles.add(vehicle);
             passengerCarSlots--;
             result = true;
-        }
-        if (vehicle.getSize() > PassengerCar.SIZE) {
-            if (truckSlots > 0) {
-                vehicles.add(vehicle);
-                truckSlots--;
-                result = true;
-            } else {
-                if (vehicle.getSize() <= passengerCarSlots) {
-                    vehicles.add(vehicle);
-                    passengerCarSlots -= vehicle.getSize();
-                    result = true;
-                }
-            }
+        } else if (vehicle.getSize() > PassengerCar.SIZE && truckSlots > 0) {
+            vehicles.add(vehicle);
+            truckSlots--;
+            result = true;
+        } else if (vehicle.getSize() > PassengerCar.SIZE && truckSlots < 1
+                && vehicle.getSize() <= passengerCarSlots) {
+            vehicles.add(vehicle);
+            passengerCarSlots -= vehicle.getSize();
+            result = true;
         }
         return result;
     }
@@ -50,6 +46,6 @@ public class SimpleParking implements Parking {
 
     @Override
     public List<Vehicle> getVehicles() {
-        return vehicles;
+        return List.copyOf(vehicles);
     }
 }
