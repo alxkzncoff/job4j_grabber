@@ -1,4 +1,4 @@
-package ru.job4j.ood.srp;
+package ru.job4j.ood.isp.menu.srp;
 
 import java.nio.file.Path;
 import java.util.List;

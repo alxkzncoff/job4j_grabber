@@ -1,4 +1,4 @@
-package ru.job4j.ood.srp;
+package ru.job4j.ood.isp.menu.srp;
 
 import java.util.Date;
 import java.util.List;
